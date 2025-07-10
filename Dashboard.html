@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ThreatEye Dashboard</title>
+    <style>
+        body {
+            font-family: monospace;
+            background-color: #121212;
+            color:#00FF41;
+            padding: 20px;
+        }
+        .alert {
+            border: 1px solid #00FF41;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #1e1e1e;
+            white-space: pre-wrap;
+        }
+        .refresh {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛡️ ThreatEye: Alert Dashboard</h1>
+    <div class="refresh">
+        <form method="GET" action="/">
+            <button type="submit">🔁 Refresh Alerts</button>
+        </form>
+    </div>
+    {% for alert in alerts %}
+        <div class="alert">{{ alert }}</div>
+    {% endfor %}
+</body>
+</html>
