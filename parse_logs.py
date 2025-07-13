@@ -1,11 +1,19 @@
+import re
+
+def extract_ips(line):
+    return re.findall(r'\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b', line)
+
 def read_log(filepath):
     try:
         with open(filepath, 'r') as file:
             lines = file.readlines()
 
-        print("[+] Reading Log File...\n")
+        print("[+] Parsing Log File...\n")
         for line in lines:
-            print(line.strip())
+            ips = extract_ips(line)
+            print(f"LOG: {line.strip()}")
+            if ips:
+                print(f" → Found IP(s): {', '.join(ips)}\n")
 
     except FileNotFoundError:
         print(f"[-] Log file not found: {filepath}")
@@ -14,7 +22,7 @@ def read_log(filepath):
 
 
 if __name__ == "__main__":
-    read_log("C:/Users/HP/ThreatEye/data/local_logs/dummy_syslog.log")
+   read_log("C:/Users/HP/ThreatEye/data/local_logs/dummy_syslog.log")
 
 
 #Ingesting logs (from file, later maybe real-time stream)
